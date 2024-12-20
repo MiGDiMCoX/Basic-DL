@@ -6,21 +6,27 @@ Created on Fri Feb 26 20:24:56 2021
 """
 import pandas as pd
 import numpy as np
-from neural import MLP
-
+from neural_2 import MLP
+from sklearn.preprocessing import LabelBinarizer
 
 df = pd.read_csv('data.csv')
 
 df = df.iloc[np.random.permutation(len(df))]
+
+#выбираем 5 столбец из 100 строк
 y = df.iloc[0:100, 4].values
-# так как ответы у нас строки - нужно перейти к численным значениям
-y = np.where(y == "Iris-setosa", 1, 0).reshape(-1,1)
+
+#преобразуем строковые значения в бинарные массивы 
+#[[1, 0, 0],[0, 1, 0],[0, 0, 1]]
+encoder = LabelBinarizer()
+y = encoder.fit_transform(y)
+
 # возьмем четыре признака
 X = df.iloc[0:100, [0, 1, 2, 3]].values
 
 inputSize = X.shape[1] # количество входных сигналов равно количеству признаков задачи 
 hiddenSizes = 10 # задаем число нейронов скрытого (А) слоя 
-outputSize = 1 if len(y.shape) else y.shape[1] # количество выходных сигналов равно количеству классов задачи
+outputSize = 3 if len(y.shape) else y.shape[1] # количество выходных сигналов равно количеству классов задачи
 
 iterations = 50
 learning_rate = 0.1

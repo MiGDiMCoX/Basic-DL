@@ -31,4 +31,4 @@ y = np.where(y == "Iris-setosa", 1, -1)
 X = df.iloc[:, [0, 2]].values
 out, hidden_predict = NN.predict(X)
 
-print(sum(out-y.reshape(-1, 1)))
+sum(out-y.reshape(-1, 1))
