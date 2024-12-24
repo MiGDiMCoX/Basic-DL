@@ -1,0 +1,9 @@
+path: animals  # dataset root dir
+train: D:\Lab_DL_5\animals\train # train images (relative to 'path') 118287 images
+val: D:\Lab_DL_5\animals\val # val images (relative to 'path') 5000 images
+
+# Classes
+names:
+  0: cat
+  1: dog
+  2: wild
